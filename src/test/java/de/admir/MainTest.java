@@ -6,7 +6,9 @@ import junit.framework.TestSuite;
 
 
 /**
- * Unit test for simple App.
+ * Author:  Admir Memic
+ * Date:    11.03.2016
+ * E-Mail:  admir.memic@dmc.de
  */
 public class MainTest extends TestCase
 {
