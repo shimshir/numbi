@@ -3,10 +3,14 @@ package de.admir.dao.impl;
 import de.admir.exception.CrudOperationException;
 import de.admir.dao.TransactionDao;
 import de.admir.data.TransactionData;
+import de.admir.util.BinarySearch;
+import de.admir.util.ParentComparator;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 
@@ -28,9 +32,12 @@ public class TransactionDaoImpl implements TransactionDao
 				.filter(t -> t.getId().equals(transactionData.getId()))
 				.findFirst()
 				.isPresent())
+		{
 			throw new CrudOperationException(
 					String.format("Transaction id: %s exists already, please choose another id", transactionData.getId()));
+		}
 		transactionsTableStub.add(transactionData);
+		Collections.sort(transactionsTableStub, (t1, t2) -> ParentComparator.INSTANCE.compare(t1.getParentId(), t2.getParentId()));
 		return transactionData;
 	}
 
@@ -46,10 +53,7 @@ public class TransactionDaoImpl implements TransactionDao
 	@Override
 	public List<TransactionData> findTransactionsByParentId(Long parentId)
 	{
-		return transactionsTableStub
-				.stream()
-				.filter(t -> parentId.equals(t.getParentId()))
-				.collect(Collectors.toList());
+		return BinarySearch.search(transactionsTableStub, parentId, TransactionData::getParentId, ParentComparator.INSTANCE);
 	}
 
 	@Override
