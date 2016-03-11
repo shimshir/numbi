@@ -16,5 +16,5 @@ public interface TransactionService
 	TransactionData putTransaction(Long id, TransactionData transactionData);
 	TransactionData getTransaction(Long id);
 	List<Long> getTransactionsForType(String type);
-	Double getSumForParentId(Long id);
+	Double getSumForParentId(Long parentId);
 }

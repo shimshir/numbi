@@ -18,35 +18,44 @@ import java.util.stream.Collectors;
 @Repository("transactionDao")
 public class TransactionDaoImpl implements TransactionDao
 {
-	private List<TransactionData> transactionsStub = new ArrayList<>();
+	private List<TransactionData> transactionsTableStub = new ArrayList<>();
 
 	@Override
 	public TransactionData createTransaction(TransactionData transactionData)
 	{
-		if (transactionsStub
+		if (transactionsTableStub
 				.stream()
 				.filter(t -> t.getId().equals(transactionData.getId()))
 				.findFirst()
 				.isPresent())
 			throw new CrudOperationException(
 					String.format("Transaction id: %s exists already, please choose another id", transactionData.getId()));
-		transactionsStub.add(transactionData);
+		transactionsTableStub.add(transactionData);
 		return transactionData;
 	}
 
 	@Override
 	public TransactionData findTransactionById(Long id)
 	{
-		return transactionsStub
+		return transactionsTableStub
 				.stream()
 				.filter(t -> id.equals(t.getId()))
 				.findFirst().orElse(null);
 	}
 
 	@Override
+	public List<TransactionData> findTransactionsByParentId(Long parentId)
+	{
+		return transactionsTableStub
+				.stream()
+				.filter(t -> parentId.equals(t.getParentId()))
+				.collect(Collectors.toList());
+	}
+
+	@Override
 	public List<TransactionData> findTransactionsByType(String type)
 	{
-		return transactionsStub
+		return transactionsTableStub
 				.stream()
 				.filter(t -> type.equals(t.getType()))
 				.collect(Collectors.toList());

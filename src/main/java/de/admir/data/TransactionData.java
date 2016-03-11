@@ -1,6 +1,7 @@
 package de.admir.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 /**
@@ -14,6 +15,7 @@ public class TransactionData
 	private Long id;
 	private Double amount;
 	private String type;
+	@JsonProperty("parent_id")
 	private Long parentId;
 
 	public TransactionData()

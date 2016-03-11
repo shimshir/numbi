@@ -1,7 +1,6 @@
 package de.admir.controller;
 
 import de.admir.data.TransactionData;
-import de.admir.exception.CrudOperationException;
 import de.admir.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

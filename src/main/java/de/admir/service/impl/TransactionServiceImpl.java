@@ -2,6 +2,7 @@ package de.admir.service.impl;
 
 import de.admir.dao.TransactionDao;
 import de.admir.data.TransactionData;
+import de.admir.exception.CrudOperationException;
 import de.admir.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,9 +45,21 @@ public class TransactionServiceImpl implements TransactionService
 	}
 
 	@Override
-	public Double getSumForParentId(Long id)
+	public Double getSumForParentId(Long parentId)
 	{
-		// TODO: Remove stub implementation
-		return 0D;
+		TransactionData rootTransaction = transactionDao.findTransactionById(parentId);
+		if (rootTransaction == null)
+			throw new CrudOperationException("Could not find transaction for id: " + parentId);
+		return calculateChildrenSum(rootTransaction);
+	}
+
+	private Double calculateChildrenSum(TransactionData transactionNode)
+	{
+		List<TransactionData> children = transactionDao.findTransactionsByParentId(transactionNode.getId());
+		return transactionNode.getAmount() + ((children == null || children.size() == 0) ? 0D :
+				children
+						.stream()
+						.mapToDouble(this::calculateChildrenSum)
+						.sum());
 	}
 }

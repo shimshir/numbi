@@ -14,5 +14,6 @@ public interface TransactionDao
 {
 	TransactionData createTransaction(TransactionData transactionData);
 	TransactionData findTransactionById(Long id);
+	List<TransactionData> findTransactionsByParentId(Long parentId);
 	List<TransactionData> findTransactionsByType(String type);
 }
