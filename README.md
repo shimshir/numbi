@@ -1,6 +1,6 @@
 # numbi
 
-Requirements are Java 8 and Maven 3.
+Requirements are Java 8 and Maven 3.<br>
 Navigate to the project folder.
 
 To build execute
