@@ -10,10 +10,8 @@ import org.springframework.context.ApplicationContext;
  * E-Mail:  admir.memic@dmc.de
  */
 @SpringBootApplication
-public class Main
-{
-	public static void main(String[] args)
-	{
-		ApplicationContext ctx = SpringApplication.run(Main.class, args);
-	}
+public class Main {
+    public static void main(String[] args) {
+        ApplicationContext ctx = SpringApplication.run(Main.class, args);
+    }
 }

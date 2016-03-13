@@ -10,10 +10,12 @@ import java.util.List;
  * Date:    11.03.2016
  * E-Mail:  admir.memic@dmc.de
  */
-public interface TransactionDao
-{
-	TransactionData createTransaction(TransactionData transactionData);
-	TransactionData findTransactionById(Long id);
-	List<TransactionData> findTransactionsByParentId(Long parentId);
-	List<TransactionData> findTransactionsByType(String type);
+public interface TransactionDao {
+    TransactionData createTransaction(TransactionData transactionData);
+
+    TransactionData findTransactionById(Long id);
+
+    List<TransactionData> findTransactionsByParentId(Long parentId);
+
+    List<TransactionData> findTransactionsByType(String type);
 }

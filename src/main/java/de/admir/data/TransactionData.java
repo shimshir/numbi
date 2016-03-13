@@ -9,66 +9,64 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Date:    11.03.2016
  * E-Mail:  admir.memic@dmc.de
  */
-public class TransactionData
-{
-	@JsonIgnore
-	private Long id;
-	private Double amount;
-	private String type;
-	@JsonProperty("parent_id")
-	private Long parentId;
+public class TransactionData {
+    @JsonIgnore
+    private Long id;
+    private Double amount;
+    private String type;
+    @JsonProperty("parent_id")
+    private Long parentId;
 
-	public TransactionData()
-	{
-	}
+    public TransactionData() {
+    }
 
-	public TransactionData(Long id, Double amount, String type, Long parentId)
-	{
-		if (id == null)
-			throw new IllegalArgumentException("Transaction id can not be null!");
-		this.id = id;
-		this.amount = amount;
-		this.type = type;
-		this.parentId = parentId;
-	}
+    public TransactionData(TransactionData transaction) {
+        if (transaction.getId() == null)
+            throw new IllegalArgumentException("Transaction id can not be null!");
+        this.id = transaction.getId();
+        this.amount = transaction.getAmount();
+        this.type = transaction.getType();
+        this.parentId = transaction.getParentId();
+    }
 
-	public Long getId()
-	{
-		return id;
-	}
+    public TransactionData(Long id, Double amount, String type, Long parentId) {
+        if (id == null)
+            throw new IllegalArgumentException("Transaction id can not be null!");
+        this.id = id;
+        this.amount = amount;
+        this.type = type;
+        this.parentId = parentId;
+    }
 
-	public void setId(Long id)
-	{
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public Double getAmount()
-	{
-		return amount;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setAmount(Double amount)
-	{
-		this.amount = amount;
-	}
+    public Double getAmount() {
+        return amount;
+    }
 
-	public String getType()
-	{
-		return type;
-	}
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
 
-	public void setType(String type)
-	{
-		this.type = type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public Long getParentId()
-	{
-		return parentId;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public void setParentId(Long parentId)
-	{
-		this.parentId = parentId;
-	}
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
 }

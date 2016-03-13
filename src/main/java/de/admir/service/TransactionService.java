@@ -11,10 +11,12 @@ import java.util.List;
  * Date:    11.03.2016
  * E-Mail:  admir.memic@dmc.de
  */
-public interface TransactionService
-{
-	TransactionData putTransaction(Long id, TransactionData transactionData);
-	TransactionData getTransaction(Long id);
-	List<Long> getTransactionsForType(String type);
-	Double getSumForParentId(Long parentId);
+public interface TransactionService {
+    TransactionData putTransaction(Long id, TransactionData transactionData);
+
+    TransactionData getTransaction(Long id);
+
+    List<Long> getTransactionsByType(String type);
+
+    Double getSumByParentId(Long parentId);
 }
