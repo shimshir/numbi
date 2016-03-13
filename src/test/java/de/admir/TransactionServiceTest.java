@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -36,27 +34,11 @@ public class TransactionServiceTest {
     public void setUp() {
         if (setUpIsDone)
             return;
-        createTestTransactions();
+        MainTest.getTestTransactions().forEach(transactionDao::createTransaction);
         setUpIsDone = true;
     }
 
-    private void createTestTransactions() {
-        List<TransactionData> transactions = new ArrayList<>();
-        transactions.add(new TransactionData(0L, 1000D, "root", null));
-        transactions.add(new TransactionData(1L, 1010D, "car", 0L));
-        transactions.add(new TransactionData(2L, 1020D, "food", 0L));
-        transactions.add(new TransactionData(3L, 1030D, "part", 1L));
-        transactions.add(new TransactionData(4L, 1040D, "part", 1L));
-        transactions.add(new TransactionData(5L, 1050D, "part", 1L));
-        transactions.add(new TransactionData(6L, 1060D, "fruit", 2L));
-        transactions.add(new TransactionData(7L, 1070D, "meat", 2L));
-        transactions.add(new TransactionData(8L, 1080D, "electric", 4L));
-        transactions.add(new TransactionData(9L, 1090D, "electric", 4L));
-        transactions.add(new TransactionData(10L, 1100D, "fish", 7L));
-        transactions.add(new TransactionData(11L, 1110D, "meat", 7L));
-        transactions.add(new TransactionData(12L, 1120D, "fish", 10L));
-        transactions.forEach(transaction -> transactionDao.createTransaction(transaction));
-    }
+
 
     @Test
     public void testCreateTransaction() {
